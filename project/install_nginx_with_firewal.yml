@@ -1,0 +1,36 @@
+---
+- name: Set up Nginx Web Server with Firewall
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: Ensure Nginx is installed
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Ensure Nginx is started and enabled
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Allow HTTP (port 80) through the firewall
+      ufw:
+        rule: allow
+        port: '80'
+        proto: tcp
+        state: enabled
+
+    - name: Allow HTTPS (port 443) through the firewall
+      ufw:
+        rule: allow
+        port: '443'
+        proto: tcp
+        state: enabled
+
+    - name: Enable UFW (Uncomplicated Firewall)
+      ufw:
+        state: enabled
+        policy: allow  # By default, allow all outgoing traffic
+

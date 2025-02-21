@@ -1,0 +1,4 @@
+[webserver]
+172.16.150.171 ansible_user=synnefo ansible_ssh_private_key_file=~/.ssh/id_rsa
+[databaseserver]
+172.16.150.171

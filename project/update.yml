@@ -1,0 +1,14 @@
+---
+- name: Update and upgrade Linux Mint system
+  hosts: webserver
+  become: yes
+
+  tasks:
+    - name: Update apt package list
+      apt:
+        update_cache: yes
+        
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist   # Perform a full upgrade (including dependency changes)
+

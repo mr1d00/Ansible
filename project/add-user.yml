@@ -1,0 +1,12 @@
+---
+- name: Add a user and add them to the wheel group
+  hosts: webserver
+  become: yes  # Run tasks with elevated privileges
+
+  tasks:
+    - name: Add a new user
+      user:
+        name: john  # The name of the user to add
+        state: present  # Ensure the user is created
+        groups: sudo  # Add the user to the 'sudo' group
+        append: yes  # Ensure the user is added to the group without removing from other groups

@@ -1,0 +1,15 @@
+---
+- name: Copy file to remote server
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: Copy file from local to remote
+      copy:
+        src: /home/synnefo/ansible-project/TEST-file.txt
+        dest: /home/synnefo/Documents/ansible/TEST-file.txt
+        owner: synnefo
+        group: john
+        mode: '0644'
+    - name: Print message
+      debug: 
+        msg: "File has been copied successfully" 
