@@ -1,0 +1,46 @@
+---
+- name: variables
+  hosts: webserver
+  vars:
+    # 1. string variable
+    student_name: admin
+
+    # 2. boolean
+    is_enabled: true
+
+    # 3. list variables
+    student_list:
+      - murshid
+      - nandana
+      - anamika
+      - mridul
+
+    # 4. students_marks
+    student_marks:
+          mridul: 85
+          murshid: 90
+          anamika: 86
+          nandana: 75
+
+  tasks:
+
+    - name: string variable
+      debug:
+        var: student_name
+
+    - name:  boolean
+      debug:
+        msg: variable value is true
+      when: is_enabled
+
+    - name: list variables
+      debug:
+        var: student_list
+
+    - name: Print Dictionary variable
+      debug:
+        var: students_marks
+          #var: students_marks.mridul
+
+        #msg: " Mridul 's marks is {{ students_marks.mridul}} "
+

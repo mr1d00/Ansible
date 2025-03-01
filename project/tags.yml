@@ -1,0 +1,18 @@
+---
+- name: Set up Nginx Web Server with Firewall
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: Ensure Nginx is installed
+      tags:
+        - install
+      apt:
+        name: nginx
+        state: present
+
+    - name: remove nginx
+      tags:
+        - remove
+      apt:
+        name: nginx
+        state: absent

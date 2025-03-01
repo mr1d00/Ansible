@@ -1,0 +1,11 @@
+- name: print port
+  hosts: webserver
+  vars:
+    ports_prints:
+      - port: 8080
+
+  tasks:
+    - name: print message for port
+      debug:
+        msg: "The port is {{ ports_prints[0].port }}"
+

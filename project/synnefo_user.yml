@@ -1,0 +1,24 @@
+---
+- name: Add a user and add them to the wheel group and install packages
+  hosts: webserver
+  become: yes 
+  vars:
+    pkgs:
+      - git
+      - tree
+
+  tasks:
+    - name: Add a new user
+      user:
+        name: ansible_user
+        state: present
+        groups: sudo
+        append: yes
+        create_home: yes
+        password: asd123.
+
+    - name: Install pre-requisite packages
+      apt:
+        name: "{{ pkgs }}"
+        state: present
+        update_cache: yes   

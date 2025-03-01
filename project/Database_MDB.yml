@@ -1,0 +1,13 @@
+---
+- name: Create a new database in MariaDB
+  hosts: databaseserver
+  become: yes
+  tasks:
+    - name: Ensure the MariaDB database is present
+      mysql_db:
+        name: mydatabase          # The name of the database you want to create
+        state: present            # This ensures the database is created
+        login_user: root          # MySQL root user
+        login_password: asd123.   # Root password
+        login_host: localhost     # MySQL host (use 'localhost' if on the same machine)
+

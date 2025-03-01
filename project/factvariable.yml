@@ -1,0 +1,48 @@
+---
+- name: Gather and display system facts
+  hosts: webserver
+  gather_facts: yes
+
+  tasks:
+    - name: Display the OS distribution
+      debug:
+        msg: "The OS distribution is {{ ansible_facts['distribution'] }}"
+
+    - name: Display the OS family
+      debug:
+        msg: "The OS family is {{ ansible_facts['os_family'] }}"
+
+    - name: Display the CPU details
+      debug:
+        msg: "CPU model is {{ ansible_facts['processor'][0] }}"
+
+    - name: Display the IP address
+      debug:
+        msg: "The IP address is {{ ansible_facts['default_ipv4']['address'] }}"
+
+    - name: Display the memory details (Total RAM)
+      debug:
+        msg: "Total RAM is {{ ansible_facts['memtotal_mb'] }} MB"
+
+    - name: Display the hostname
+      debug:
+        msg: "The hostname is {{ ansible_facts['hostname'] }}"
+
+    - name: Get the currently logged-in user
+      command: whoami
+      register: current_user
+
+    - name: Display the logged-in user
+      debug:
+        msg: "The logged-in user is {{ current_user.stdout }}"
+
+    - name: Display the release scheme (version and codename)
+      debug:
+        msg: |
+          The OS release scheme is {{ ansible_facts['distribution_version'] }}
+          {% if ansible_facts['distribution_codename'] is defined %}
+          (Codename: {{ ansible_facts['distribution_codename'] }})
+          {% else %}
+          (Codename not available)
+          {% endif %}
+

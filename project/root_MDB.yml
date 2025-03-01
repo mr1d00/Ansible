@@ -1,0 +1,12 @@
+---
+- name: Create MariaDB database
+  hosts: databaseserver
+  become: yes
+  tasks:
+    - name: Create a new database in MariaDB
+      mysql_db:
+        name: my_database
+        state: present
+        login_user: root
+        login_password: root
+

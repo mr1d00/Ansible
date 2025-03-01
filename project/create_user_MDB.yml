@@ -1,0 +1,15 @@
+---
+- name: Create MariaDB user and grant permissions
+  hosts: databaseserver
+  become: yes
+  tasks:
+    - name: Create a new user for MariaDB
+      mysql_user:
+        name: MDB_user                  # The username to be created
+        password: asd123.               # Password for the user
+        priv: "my_database.*:ALL"        # Grant privileges on 'my_database'
+        state: present                  # Ensure the user is created
+        login_user: root                # MySQL root user (admin privileges)
+        login_password: asd123.         # Root password for MariaDB
+        login_host: localhost           # Host to connect to MySQL/MariaDB
+

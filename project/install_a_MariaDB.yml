@@ -1,0 +1,21 @@
+---
+- name: Install mariaDB and configure database
+  hosts: databaseserver
+  become: yes
+
+  tasks:
+    - name: Install MariaDB server
+      apt:
+        name: mariadb-server
+        state: present
+
+    - name: Start and enable MariaDB service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+    - name: Ensure Python's PyMySQL is installed
+      pip:
+        name: PyMySQL
+        state: present
